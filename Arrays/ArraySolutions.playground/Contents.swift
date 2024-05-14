@@ -33,7 +33,7 @@ func containsDuplicate(_ nums: [Int]) -> Bool {
 //print(containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
 
 
-// MARK: 283. Move non zeros, Easy
+// MARK: - 283. Move non zeros, Easy
 /*
  Array, Two pointers
  Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
@@ -70,7 +70,7 @@ func moveZeroes(_ nums: inout [Int]) {
 //print(nums)
 
 
-// MARK: 136. Single number, Easy
+// MARK: - 136. Single number, Easy
 
 /*
  Arrays, Bit manipulation
@@ -118,8 +118,31 @@ func singleNumber(_ nums: [Int]) -> Int {
 //print(singleNumber([4,1,2,1,2]))
 //print(singleNumber([1]))
 
+// MARK: - 268. Missing number, Easy
+/*
+ Arrays, Bit manipulation
+ Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+ */
 
+//func missingNumber(_ nums: [Int]) -> Int {
+//    let n = nums.count
+//    let totalSum = (n * (n + 1)) / 2
+//    let arraySum = nums.reduce(0, +)
+//    return totalSum - arraySum
+//}
 
+func missingNumber(_ nums: [Int]) -> Int {
+    var missing = nums.count    
+    for (index, num) in nums.enumerated() {
+        missing ^= index ^ num
+    }
+    
+    return missing
+}
+
+print(missingNumber([3,0,1]))
+print(missingNumber([0,1]))
+print(missingNumber([9,6,4,2,3,5,7,0,1]))
 
 
 
