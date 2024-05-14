@@ -1,6 +1,6 @@
 import UIKit
 
-//MARK: - Contains duplicate
+//MARK: - 217. Contains duplicate, Easy
 /*
  Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
  Example 1:
@@ -68,6 +68,56 @@ func moveZeroes(_ nums: inout [Int]) {
 //var nums = [0,1,0,3,12]
 //moveZeroes(&nums)
 //print(nums)
+
+
+// MARK: 136. Single number, Easy
+
+/*
+ Arrays, Bit manipulation
+ Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+ You must implement a solution with a linear runtime complexity and use only constant extra space.
+ */
+
+//func singleNumber(_ nums: [Int]) -> Int {
+//    
+/// using dictionary
+//    var dict: [Int: Int] = [:]
+//    for i in nums {
+//        dict[i] = (dict[i] ?? 0) + 1
+//    }
+//    
+//    guard let singleNumber = dict.filter {$0.value == 1}.keys.first else { return 0 }
+//    return singleNumber
+//}
+
+/// using sets
+func singleNumber(_ nums: [Int]) -> Int {
+
+    var set: Set<Int> = []
+    for num in nums {
+        if set.contains(num) {
+            set.remove(num)
+        } else {
+            set.insert(num)
+        }
+    }
+    return set.first!
+}
+
+/// using maths
+
+//func singleNumber(_ nums: [Int]) -> Int {
+//    
+//    let uniqueSum = nums.reduce(0, { $0 + ($1 * 2) })
+//    let totalSum = nums.reduce(0, +)
+//    
+//    return uniqueSum - totalSum
+//}
+//print(singleNumber([2,2,1]))
+//print(singleNumber([4,1,2,1,2]))
+//print(singleNumber([1]))
+
 
 
 
