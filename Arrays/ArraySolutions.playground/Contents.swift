@@ -2,6 +2,7 @@ import UIKit
 
 //MARK: - 217. Contains duplicate, Easy
 /*
+ Arrays
  Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
  Example 1:
 
@@ -32,6 +33,51 @@ func containsDuplicate(_ nums: [Int]) -> Bool {
 //print(containsDuplicate([1,2,3,4]))
 //print(containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
 
+
+// MARK: - 448. Find all dissappeared numbers, Easy
+/*
+ Arrays
+ Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.
+ */
+
+func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
+    
+    var numSet = Set(1...nums.count)
+    print(numSet)
+    for num in nums {
+        numSet.remove(num)
+    }
+    return Array(numSet)
+}
+
+//print(findDisappearedNumbers([4,3,2,7,8,2,3,1]))
+//print(findDisappearedNumbers([1,1]))
+
+//// MARK: - 2022. Convert 1D array into 2D array
+///*
+// Arrays
+// You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n. You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.
+//
+// The elements from indices 0 to n - 1 (inclusive) of original should form the first row of the constructed 2D array, the elements from indices n to 2 * n - 1 (inclusive) should form the second row of the constructed 2D array, and so on.
+//
+// Return an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.
+//
+//
+// */
+//
+//func construct2DArray(_ original: [Int], _ m: Int, _ n: Int) -> [[Int]] {
+// 
+//    guard original.count == m * n else {
+//        print("input array size is not equal to size of the 2D array")
+//        return []
+//    }
+//            
+//    
+//    var result: [[Int]] = [[]]
+//    return result
+//}
+//
+//print(construct2DArray([1,2,3,4], 2, 2))
 
 // MARK: - 283. Move non zeros, Easy
 /*
@@ -132,7 +178,7 @@ func singleNumber(_ nums: [Int]) -> Int {
 //}
 
 func missingNumber(_ nums: [Int]) -> Int {
-    var missing = nums.count    
+    var missing = nums.count
     for (index, num) in nums.enumerated() {
         missing ^= index ^ num
     }
@@ -140,9 +186,9 @@ func missingNumber(_ nums: [Int]) -> Int {
     return missing
 }
 
-print(missingNumber([3,0,1]))
-print(missingNumber([0,1]))
-print(missingNumber([9,6,4,2,3,5,7,0,1]))
+//print(missingNumber([3,0,1]))
+//print(missingNumber([0,1]))
+//print(missingNumber([9,6,4,2,3,5,7,0,1]))
 
 
 
