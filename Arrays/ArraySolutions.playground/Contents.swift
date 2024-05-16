@@ -86,7 +86,7 @@ func construct2DArray(_ original: [Int], _ m: Int, _ n: Int) -> [[Int]] {
     return result
 }
 
-print(construct2DArray([1,2,3,4], 2, 2))
+//print(construct2DArray([1,2,3,4], 2, 2))
 
 // MARK: - 283. Move non zeros, Easy
 /*
@@ -198,6 +198,44 @@ func missingNumber(_ nums: [Int]) -> Int {
 //print(missingNumber([3,0,1]))
 //print(missingNumber([0,1]))
 //print(missingNumber([9,6,4,2,3,5,7,0,1]))
+
+
+
+// MARK: - MEDIUM
+
+// MARK: - Product of Array except Self
+
+/*
+ Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+ The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+ You must write an algorithm that runs in O(n) time and without using the division operation.
+ */
+
+func productExceptSelf(_ nums: [Int]) -> [Int] {
+    let n = nums.count
+    var result = Array(repeating: 1, count: n)
+    
+    var leftProduct = 1
+    for i in 0..<n {
+        result[i] = leftProduct
+        leftProduct *= nums[i]
+        print(result)
+    }
+    
+    var rightProduct = 1
+    for i in stride(from: n-1, through: 0, by: -1) {
+        
+    }
+        
+    return result
+}
+
+//print(productExceptSelf([1,2,3,4]))
+
+
+
 
 
 
