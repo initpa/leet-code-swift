@@ -271,9 +271,39 @@ func findDuplicate(_ nums: [Int]) -> Int {
     return fast
 }
 
-print(findDuplicate([1,3,4,2,2]))
+//print(findDuplicate([1,3,4,2,2]))
+
+// MARK: - 442. Find all duplicates in an array.
+/*
+ Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+ You must write an algorithm that runs in O(n) time and uses only constant extra space.
+ */
+
+//func findDuplicates(_ nums: [Int]) -> [Int] {
+//    var dict: [Int: Int] = [:]
+//    
+//    for num in nums {
+//        dict[num] = (dict[num] ?? 0) + 1
+//    }
+//    let result = dict.filter {$0.value > 1}.map {$0.key}
+//    return result
+//}
+func findDuplicates(_ nums: [Int]) -> [Int] {
+    var nums = nums
+    var ans = [Int]()
+    
+    for num in nums {
+        if nums[abs(num) - 1] < 0 {
+            ans.append(num)
+        }
+        nums[abs(num) - 1] *= -1
+    }
+    
+    return ans
+}
 
 
+print(findDuplicates([4,3,2,7,8,2,3,1]))
 
 
 
