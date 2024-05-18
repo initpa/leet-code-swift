@@ -221,18 +221,63 @@ func productExceptSelf(_ nums: [Int]) -> [Int] {
     for i in 0..<n {
         result[i] = leftProduct
         leftProduct *= nums[i]
-        print(result)
     }
     
     var rightProduct = 1
     for i in stride(from: n-1, through: 0, by: -1) {
-        
+        result[i] *= rightProduct
+        rightProduct *= nums[i]
     }
         
     return result
 }
 
 //print(productExceptSelf([1,2,3,4]))
+
+// MARK: - 287. Find the duplicate number
+/*
+ Arrays, Binary search, two pointers
+ Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+ There is only one repeated number in nums, return this repeated number.
+ You must solve the problem without modifying the array nums and uses only constant extra space.
+ */
+
+//func findDuplicate(_ nums: [Int]) -> Int {
+//
+//    var dict: [Int: Int] = [:]
+//    for num in nums {
+//        dict[num] = (dict[num] ?? 0) + 1
+//    }
+//    guard let result = dict.filter{$0.value > 1}.first?.key else { return 0 }
+//    return result
+//    return 0
+//}
+
+func findDuplicate(_ nums: [Int]) -> Int {
+    var slow = nums[0]
+    var fast = nums[0]
+    
+    repeat {
+        slow = nums[slow]
+        fast = nums[nums[fast]]
+    } while slow != fast
+    
+    slow = nums[0]
+    while slow != fast {
+        slow = nums[slow]
+        fast = nums[fast]
+    }
+        
+    return fast
+}
+
+print(findDuplicate([1,3,4,2,2]))
+
+
+
+
+
+
 
 
 
