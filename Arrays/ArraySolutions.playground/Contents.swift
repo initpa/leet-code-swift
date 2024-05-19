@@ -303,7 +303,34 @@ func findDuplicates(_ nums: [Int]) -> [Int] {
 }
 
 
-print(findDuplicates([4,3,2,7,8,2,3,1]))
+//print(findDuplicates([4,3,2,7,8,2,3,1]))
+
+
+// MARK: - 48. Rotate Image
+
+func rotate(_ matrix: inout [[Int]]) {
+    
+    let n = matrix.count
+    
+    // Step 1: Transpose the matrix
+    for i in 0..<n {
+        for j in i+1..<n {
+            let temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
+        }
+    }
+    
+    // Step 2: Reverse each row
+    for i in 0..<n {
+        matrix[i].reverse()
+    }
+}
+var matrix = [[1,2,3],[4,5,6],[7,8,9]]
+print(matrix)
+rotate(&matrix)
+print(matrix)
+
 
 
 
