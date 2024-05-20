@@ -331,10 +331,36 @@ func rotate(_ matrix: inout [[Int]]) {
         matrix[i].reverse()
     }
 }
-var matrix = [[1,2,3],[4,5,6],[7,8,9]]
-rotate(&matrix)
+//var matrix = [[1,2,3],[4,5,6],[7,8,9]]
+//rotate(&matrix)
 
+// MARK: - 128. Longest consecutive sequence
+/*
+ Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 
+ You must write an algorithm that runs in O(n) time.
+ */
+func longestConsecutive(_ nums: [Int]) -> Int {
+    var setOfNums = Set(nums)
+    var longestLength = 0
+    
+    for num in nums {
+        if !setOfNums.contains(num - 1) {
+            var currentNum = num
+            var currentLength = 1
+            
+            while setOfNums.contains(currentNum + 1) {
+                currentNum += 1
+                currentLength += 1
+            }
+            longestLength = max(longestLength, currentLength)
+        }
+    }
+    
+    return longestLength
+}
+
+print(longestConsecutive([9,1,4,7,3,-1,0,5,8,-1,6]))
 
 
 
