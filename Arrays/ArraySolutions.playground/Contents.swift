@@ -427,6 +427,116 @@ func setZeroes(_ matrix: inout [[Int]]) {
         }
     }
 }
+//var matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+//print(matrix)
+//setZeroes(&matrix)
+//print(matrix)
+
+// MARK: - 54. Spiral matrix
+
+//func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+//    guard matrix.count > 0 && matrix[0].count > 0 else {
+//        return []
+//    }
+//    
+//    var result = [Int]()
+//    var top = 0
+//    var bottom = matrix.count - 1
+//    var left = 0
+//    var right = matrix[0].count - 1
+//    
+//    while top <= bottom && left <= right {
+//        // Traverse top row
+//        for i in left...right {
+//            result.append(matrix[top][i])
+//        }
+//        top += 1
+//        
+//        // Traverse right column
+//        for i in top...bottom {
+//            result.append(matrix[i][right])
+//        }
+//        right -= 1
+//        
+//        // Check if top has not crossed bottom
+//        if top <= bottom {
+//            // Traverse bottom row
+//            for i in (left...right).reversed() {
+//                result.append(matrix[bottom][i])
+//            }
+//            bottom -= 1
+//        }
+//        
+//        // Check if left has not crossed right
+//        if left <= right {
+//            // Traverse left column
+//            for i in (top...bottom).reversed() {
+//                result.append(matrix[i][left])
+//            }
+//            left += 1
+//        }
+//    }
+//    
+//    return result
+//}
+
+func spiralOrder(_ matrix: [[Int]]) -> [Int] {
+    var res = [Int]()
+    
+    guard matrix.count != 0 else {
+        return res
+    }
+    
+    var startX = 0
+    var endX = matrix.count - 1
+    var startY = 0
+    var endY = matrix[0].count - 1
+    
+    while true {
+        // top
+        for i in startY...endY {
+            res.append(matrix[startX][i])
+        }
+        startX += 1
+        if startX > endX {
+            break
+        }
+        
+        // right
+        for i in startX...endX {
+            res.append(matrix[i][endY])
+        }
+        endY -= 1
+        if startY > endY {
+            break
+        }
+        
+        // bottom
+        for i in stride(from: endY, through: startY, by: -1) {
+            res.append(matrix[endX][i])
+        }
+        endX -= 1
+        if startX > endX {
+            break
+        }
+        
+        // left
+        for i in stride(from: endX, through: startX, by: -1) {
+            res.append(matrix[i][startY])
+        }
+        startY += 1
+        if startY > endY {
+            break
+        }
+    }
+    
+    return res
+}
+
+
+
+print(spiralOrder([[1,2,3],[4,5,6],[7,8,9]]))
+print(spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]))
 
 
 
