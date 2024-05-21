@@ -360,7 +360,73 @@ func longestConsecutive(_ nums: [Int]) -> Int {
     return longestLength
 }
 
-print(longestConsecutive([9,1,4,7,3,-1,0,5,8,-1,6]))
+//print(longestConsecutive([9,1,4,7,3,-1,0,5,8,-1,6]))
+
+// MARK: - 73. Set Matrix to zero
+/*
+ Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+ */
+
+func setZeroes(_ matrix: inout [[Int]]) {
+    guard !matrix.isEmpty else {
+        return
+    }
+    
+    let m = matrix.count
+    let n = matrix[0].count
+    
+    var firstRowHasZero = false
+    var firstColHasZero = false
+    
+    // Check if the first row has zero
+    for j in 0..<n {
+        if matrix[0][j] == 0 {
+            firstRowHasZero = true
+            break
+        }
+    }
+    
+    // Check if the first column has zero
+    for i in 0..<m {
+        if matrix[i][0] == 0 {
+            firstColHasZero = true
+            break
+        }
+    }
+    
+    // Mark rows and columns with zeros
+    for i in 1..<m {
+        for j in 1..<n {
+            if matrix[i][j] == 0 {
+                matrix[i][0] = 0
+                matrix[0][j] = 0
+            }
+        }
+    }
+    
+    // Zero out elements based on marks in the first row and column
+    for i in 1..<m {
+        for j in 1..<n {
+            if matrix[i][0] == 0 || matrix[0][j] == 0 {
+                matrix[i][j] = 0
+            }
+        }
+    }
+    
+    // Zero out the first row if needed
+    if firstRowHasZero {
+        for j in 0..<n {
+            matrix[0][j] = 0
+        }
+    }
+    
+    // Zero out the first column if needed
+    if firstColHasZero {
+        for i in 0..<m {
+            matrix[i][0] = 0
+        }
+    }
+}
 
 
 
