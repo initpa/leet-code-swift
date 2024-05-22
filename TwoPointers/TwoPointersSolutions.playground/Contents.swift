@@ -46,9 +46,62 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     return []
 }
 
-print(twoSum([2,7,11,15], 9))
-print(twoSum([3,2,4], 6))
-print(twoSum([3,3], 6))
+//print(twoSum([2,7,11,15], 9))
+//print(twoSum([3,2,4], 6))
+//print(twoSum([3,3], 6))
+
+// MARK: - 21. Merge two sorted lists
+
+/*
+ You are given the heads of two sorted linked lists list1 and list2.
+
+ Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+ Return the head of the merged linked list.
+ */
+
+
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
+}
+    
+func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+    var dummyHead = ListNode(0)
+    var current: ListNode? = dummyHead
+    
+    var p1 = l1
+    var p2 = l2
+    
+    while p1 != nil && p2 != nil {
+        if p1!.val < p2!.val {
+            current?.next = p1
+            p1 = p1?.next
+        } else {
+            current?.next = p2
+            p2 = p2?.next
+        }
+        current = current?.next
+    }
+    
+    if p1 != nil {
+        current?.next = p1
+    }
+    
+    if p2 != nil {
+        current?.next = p2
+    }
+    
+    return dummyHead.next
+}
 
 
 
+    
+    
+    
+    
