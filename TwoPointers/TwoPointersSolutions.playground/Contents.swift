@@ -99,6 +99,28 @@ func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
     return dummyHead.next
 }
 
+//MARK: 392. Is subsequence
+
+/*
+ A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+ */
+
+func isSubsequence(_ s: String, _ t: String) -> Bool {
+    var sIndex = s.startIndex
+    var tIndex = t.startIndex
+    
+    while sIndex < s.endIndex && tIndex < t.endIndex {
+        if s[sIndex] == t[tIndex] {
+            sIndex = s.index(after: sIndex)
+        }
+        
+        tIndex = t.index(after: tIndex)
+    }
+    return sIndex == s.endIndex
+}
+
+print(isSubsequence("abc", "ahbgdc"))
+
 
 
     
