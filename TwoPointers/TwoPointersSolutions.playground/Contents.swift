@@ -119,8 +119,36 @@ func isSubsequence(_ s: String, _ t: String) -> Bool {
     return sIndex == s.endIndex
 }
 
-print(isSubsequence("abc", "ahbgdc"))
+//print(isSubsequence("abc", "ahbgdc"))
 
+
+
+//MARK: 283. Move zeros
+/*
+ Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+ Note that you must do this in-place without making a copy of the array.
+ */
+
+func moveZeroes(_ nums: inout [Int]) {
+    var nonZeroIndex = 0
+    
+    for num in nums {
+        if num != 0 {
+            nums[nonZeroIndex] = num
+            nonZeroIndex += 1
+        }
+    }
+    
+    while nonZeroIndex < nums.count {
+        nums[nonZeroIndex] = 0
+        nonZeroIndex += 1
+    }
+}
+
+var nums = [0,1,0,3,12]
+moveZeroes(&nums)
+print(nums)
 
 
     
