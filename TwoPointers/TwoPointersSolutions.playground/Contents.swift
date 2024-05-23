@@ -148,7 +148,25 @@ func moveZeroes(_ nums: inout [Int]) {
 
 var nums = [0,1,0,3,12]
 moveZeroes(&nums)
-print(nums)
+//print(nums)
+
+// MARK: - 977. Squares of a sorted array
+/*
+ Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+ */
+
+func sortedSquares(_ nums: [Int]) -> [Int] {
+    
+    var result = nums.map({$0 * $0})
+//    for num in nums {
+//        result.append(num * num)
+//    }
+    result.sort()
+    return result
+}
+
+print(sortedSquares([-4,-1,0,3,10]))
+//print("hello")
 
 
     
