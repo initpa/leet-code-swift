@@ -47,13 +47,8 @@ func missingNumber(_ nums: [Int]) -> Int {
 //}
 
 func singleNumber(_ nums: [Int]) -> Int {
-    var singleNumber = 0
     
-    for num in nums {
-        singleNumber ^= num
-    }
-    
-    return singleNumber
+    return nums.reduce(0, ^)
 }
 
-print(singleNumber([4,1,2,1,2]))
+//print(singleNumber([4,1,2,1,2]))
