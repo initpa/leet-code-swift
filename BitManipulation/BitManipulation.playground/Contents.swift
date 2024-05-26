@@ -35,14 +35,24 @@ func missingNumber(_ nums: [Int]) -> Int {
  You must implement a solution with a linear runtime complexity and use only constant extra space.
  */
 
+//func singleNumber(_ nums: [Int]) -> Int {
+//    var allNumbers: [Int: Int] = [:]
+//    
+//    for num in nums {
+//        allNumbers[num] = (allNumbers[num] ?? 0) + 1
+//    }
+//    
+//    guard let singleNumber = allNumbers.filter({$0.value == 1}).map({ $0.key }).first else { return 0 }
+//    return singleNumber
+//}
+
 func singleNumber(_ nums: [Int]) -> Int {
-    var allNumbers: [Int: Int] = [:]
+    var singleNumber = 0
     
     for num in nums {
-        allNumbers[num] = (allNumbers[num] ?? 0) + 1
+        singleNumber ^= num
     }
     
-    guard let singleNumber = allNumbers.filter({$0.value == 1}).map({ $0.key }).first else { return 0 }
     return singleNumber
 }
 
