@@ -25,6 +25,25 @@ func missingNumber(_ nums: [Int]) -> Int {
     return missingNumber
 }
 
-print(missingNumber([3,0,1]))
+//print(missingNumber([3,0,1]))
 
+// MARK: - 136. Single Number
 
+/*
+ Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+ You must implement a solution with a linear runtime complexity and use only constant extra space.
+ */
+
+func singleNumber(_ nums: [Int]) -> Int {
+    var allNumbers: [Int: Int] = [:]
+    
+    for num in nums {
+        allNumbers[num] = (allNumbers[num] ?? 0) + 1
+    }
+    
+    guard let singleNumber = allNumbers.filter({$0.value == 1}).map({ $0.key }).first else { return 0 }
+    return singleNumber
+}
+
+print(singleNumber([4,1,2,1,2]))
