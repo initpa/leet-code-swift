@@ -10,18 +10,20 @@ import UIKit
  */
 
 func search(_ nums: [Int], _ target: Int) -> Int {
-    var left = 0
-    var right = nums.count - 1
+    return binarySearch(nums, target, 0, nums.count-1)
+}
+
+func binarySearch(_ nums: [Int],_ target: Int,_ left: Int,_ right: Int) -> Int {
     
-    while left <= right {
+    if left <= right {
         let mid = left + (right - left ) / 2
         
         if target == nums[mid] {
             return mid
         } else if target > nums[mid] {
-            left = mid + 1
+            return binarySearch(nums, target, mid + 1, right)
         } else if target < nums[mid] {
-            right = mid - 1
+            return binarySearch(nums, target, left, mid - 1)
         }
     }
     return -1
