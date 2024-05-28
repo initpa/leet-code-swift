@@ -29,5 +29,30 @@ func binarySearch(_ nums: [Int],_ target: Int,_ left: Int,_ right: Int) -> Int {
     return -1
 }
 
-print(search([-1,0,3,5,9,12], 2))
+//print(search([-1,0,3,5,9,12], 2))
 
+// MARK: - 744. Find smallest letter greater than target
+/*
+ You are given an array of characters letters that is sorted in non-decreasing order, and a character target. There are at least two different characters in letters.
+
+ Return the smallest character in letters that is lexicographically greater than target. If such a character does not exist, return the first character in letters.
+ */
+
+func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
+    var left = 0
+    var rigth = letters.count
+    
+    while left < rigth {
+        let mid = left + (rigth - left)/2
+        
+        if target >= letters[mid] {
+            left = mid + 1
+        } else {
+            rigth = mid
+        }
+    }
+        
+    return left < letters.count ? letters[left] : letters[0]
+}
+
+print(nextGreatestLetter(["c","f","j"], "a"))
