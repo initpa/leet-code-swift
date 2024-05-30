@@ -55,4 +55,22 @@ func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Characte
     return left < letters.count ? letters[left] : letters[0]
 }
 
-print(nextGreatestLetter(["c","f","j"], "a"))
+//print(nextGreatestLetter(["c","f","j"], "a"))
+
+//MARK: - 287. Find the duplicate number
+/*
+ Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+ There is only one repeated number in nums, return this repeated number.
+ You must solve the problem without modifying the array nums and uses only constant extra space.
+ */
+
+func findDuplicate(_ nums: [Int]) -> Int {
+    var dict: [Int: Int]  = [:]
+    for num in nums {
+        dict[num] = (dict[num] ?? 0) + 1
+    }
+    guard let result = dict.filter({$0.value >= 2}).map({$0.key}).first else { return 0 }
+    return result
+}
+
+print(findDuplicate([1,3,4,2,2]))
