@@ -139,13 +139,29 @@ func findMin(_ nums: [Int]) -> Int {
  */
 
 func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
-    for row in matrix {
-        for num in row {
-            if num == target {
-                return true
-            }
+    guard !matrix.isEmpty else { return false }
+    
+    let m = matrix.count
+    let n = matrix[0].count
+    
+    var left = 0
+    var right = m * n - 1
+    
+    while left <= right {
+        let mid = left + (right - left) / 2
+        let midRow = mid / n
+        let midCol = mid % n
+        let midVal = matrix[midRow][midCol]
+        
+        if midVal == target {
+            return true
+        } else if midVal < target {
+            left = mid + 1
+        } else {
+            right = mid - 1
         }
     }
+    
     return false
 }
 
