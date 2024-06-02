@@ -89,7 +89,7 @@ func findDuplicate(_ nums: [Int]) -> Int {
     
     return slow
 }
-print(findDuplicate([1,3,4,2,2]))
+//print(findDuplicate([1,3,4,2,2]))
 
 
 // MARK: - 153. find minimum in rotated array
@@ -138,38 +138,56 @@ func findMin(_ nums: [Int]) -> Int {
  You must write a solution in O(log(m * n)) time complexity.
  */
 
+//func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+//    guard !matrix.isEmpty else { return false }
+//    
+//    let m = matrix.count
+//    let n = matrix[0].count
+//    
+//    var left = 0
+//    var right = m * n - 1
+//    
+//    while left <= right {
+//        let mid = left + (right - left) / 2
+//        let midRow = mid / n
+//        let midCol = mid % m
+//        let midVal = matrix[midRow][midCol]
+//        
+//        if midVal == target {
+//            return true
+//        } else if midVal < target {
+//            left = mid + 1
+//        } else {
+//            right = mid - 1
+//        }
+//    }
+//    
+//    return false
+//}
+
 func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
-    guard !matrix.isEmpty else { return false }
+    if matrix.isEmpty {
+        return false
+    }
     
-    let m = matrix.count
-    let n = matrix[0].count
+    if matrix[0].isEmpty {
+        return false
+    }
     
-    var left = 0
-    var right = m * n - 1
-    
-    while left <= right {
-        let mid = left + (right - left) / 2
-        let midRow = mid / n
-        let midCol = mid % n
-        let midVal = matrix[midRow][midCol]
-        
-        if midVal == target {
-            return true
-        } else if midVal < target {
-            left = mid + 1
-        } else {
-            right = mid - 1
+    for i in 0 ..< matrix.count {
+        if matrix[i][matrix[0].count - 1] >= target {
+            for j in 0 ..< matrix[0].count {
+                if matrix[i][j] == target {
+                    return true
+                }
+            }
         }
     }
     
     return false
 }
 
-let matrix = [
-    [1, 3, 5, 7],
-    [10, 11, 16, 20],
-    [23, 30, 34, 60]
-]
+let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
 let target = 3
 
 print(searchMatrix(matrix, target))
