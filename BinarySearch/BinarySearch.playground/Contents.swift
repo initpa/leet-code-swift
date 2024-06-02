@@ -169,21 +169,21 @@ func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
     if matrix.isEmpty {
         return false
     }
+    let rows = matrix.count
+    let cols = matrix[0].count
     
-    if matrix[0].isEmpty {
-        return false
-    }
+    var row = rows - 1
+    var col = 0
     
-    for i in 0 ..< matrix.count {
-        if matrix[i][matrix[0].count - 1] >= target {
-            for j in 0 ..< matrix[0].count {
-                if matrix[i][j] == target {
-                    return true
-                }
-            }
+    while col < cols && row < rows && row >= 0 && col >= 0 {
+        if matrix[row][col] == target {
+            return true
+        } else if matrix[row][col] > target {
+            row -= 1
+        } else {
+            col += 1
         }
     }
-    
     return false
 }
 
