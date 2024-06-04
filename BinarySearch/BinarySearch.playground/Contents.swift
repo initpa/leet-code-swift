@@ -191,3 +191,44 @@ let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
 let target = 3
 
 print(searchMatrix(matrix, target))
+
+//MARK: - 162. Find peak element
+
+/*
+ A peak element is an element that is strictly greater than its neighbors.
+
+ Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+ You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+ You must write an algorithm that runs in O(log n) time.
+ */
+
+
+func findPeakElement(_ nums: [Int]) -> Int {
+    var left = 0
+    var right = nums.count - 1
+    
+    while left < right {
+        let mid = left + (right - left) / 2
+        
+        // Check if mid is a peak
+        if nums[mid] > nums[mid + 1] {
+            // Peak found, move left
+            right = mid
+        } else {
+            // Peak is on the right side, move right
+            left = mid + 1
+        }
+    }
+    
+    // At the end of the loop, left == right and it points to a peak
+    return left
+}
+
+// Example usage:
+let nums = [1, 2, 1, 3, 5, 6, 4]
+let peakIndex = findPeakElement(nums)
+print("Peak element index:", peakIndex) // Output: 1 or 5
+
+
