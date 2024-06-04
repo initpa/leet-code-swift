@@ -275,13 +275,48 @@ func kthSmallest(_ matrix: [[Int]], _ k: Int) -> Int {
 }
 
 // Example usage:
-let kmatrix = [
-    [1,  5,  9],
-    [10, 11, 13],
-    [12, 13, 15]
-]
-let k = 8
-print(kthSmallest(kmatrix, k)) // Output should be 13
+//let kmatrix = [
+//    [1,  5,  9],
+//    [10, 11, 13],
+//    [12, 13, 15]
+//]
+//let k = 8
+//print(kthSmallest(kmatrix, k))  Output should be 13
+
+//MARK: - 852. Peak index in a mountain array
+/*
+ An array arr is a mountain if the following properties hold:
+
+ arr.length >= 3
+ There exists some i with 0 < i < arr.length - 1 such that:
+ arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+ arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+ Given a mountain array arr, return the index i such that arr[0] < arr[1] < ... < arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
+
+ You must solve it in O(log(arr.length)) time complexity.
+ */
+
+func peakIndexInMountainArray(_ arr: [Int]) -> Int {
+    var left = 0
+    var right = arr.count - 1
+    
+    while left < right {
+        let mid = left + (right - left) / 2
+        
+        if arr[mid] < arr[mid + 1] {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+    }
+    
+    return left
+}
+
+// Example usage:
+let arr = [0, 1, 0]
+print(peakIndexInMountainArray(arr)) // Output should be 1
+
 
 
 
