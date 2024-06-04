@@ -187,7 +187,136 @@ func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
     return false
 }
 
-let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
-let target = 3
+//let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
+//let target = 3
 
-print(searchMatrix(matrix, target))
+//print(searchMatrix(matrix, target))
+
+//MARK: - 162. Find peak element
+
+/*
+ A peak element is an element that is strictly greater than its neighbors.
+
+ Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+ You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+ You must write an algorithm that runs in O(log n) time.
+ */
+
+
+func findPeakElement(_ nums: [Int]) -> Int {
+    var left = 0
+    var right = nums.count - 1
+    
+    while left < right {
+        let mid = left + (right - left) / 2
+        
+        // Check if mid is a peak
+        if nums[mid] > nums[mid + 1] {
+            // Peak found, move left
+            right = mid
+        } else {
+            // Peak is on the right side, move right
+            left = mid + 1
+        }
+    }
+    
+    // At the end of the loop, left == right and it points to a peak
+    return left
+}
+
+// Example usage:
+//let nums = [1, 2, 1, 3, 5, 6, 4]
+//let peakIndex = findPeakElement(nums)
+//print("Peak element index:", peakIndex) // Output: 1 or 5
+
+
+//MARK: - 378. Kth smallest element in a sorted array
+/*
+ Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
+ Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+ You must find a solution with a memory complexity better than O(n2).
+ */
+
+
+func countLessEqual(_ matrix: [[Int]], _ guess: Int) -> Int {
+    var count = 0
+    let n = matrix.count
+    var row = n - 1
+    var col = 0
+    while row >= 0 && col < n {
+        if matrix[row][col] <= guess {
+            count += row + 1
+            col += 1
+        } else {
+            row -= 1
+        }
+    }
+    return count
+}
+
+func kthSmallest(_ matrix: [[Int]], _ k: Int) -> Int {
+    let n = matrix.count
+    var low = matrix[0][0]
+    var high = matrix[n - 1][n - 1]
+
+    while low < high {
+        let mid = low + (high - low) / 2
+        let count = countLessEqual(matrix, mid)
+        if count < k {
+            low = mid + 1
+        } else {
+            high = mid
+        }
+    }
+
+    return low
+}
+
+// Example usage:
+//let kmatrix = [
+//    [1,  5,  9],
+//    [10, 11, 13],
+//    [12, 13, 15]
+//]
+//let k = 8
+//print(kthSmallest(kmatrix, k))  Output should be 13
+
+//MARK: - 852. Peak index in a mountain array
+/*
+ An array arr is a mountain if the following properties hold:
+
+ arr.length >= 3
+ There exists some i with 0 < i < arr.length - 1 such that:
+ arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+ arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+ Given a mountain array arr, return the index i such that arr[0] < arr[1] < ... < arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
+
+ You must solve it in O(log(arr.length)) time complexity.
+ */
+
+func peakIndexInMountainArray(_ arr: [Int]) -> Int {
+    var left = 0
+    var right = arr.count - 1
+    
+    while left < right {
+        let mid = left + (right - left) / 2
+        
+        if arr[mid] < arr[mid + 1] {
+            left = mid + 1
+        } else {
+            right = mid
+        }
+    }
+    
+    return left
+}
+
+// Example usage:
+let arr = [0, 1, 0]
+print(peakIndexInMountainArray(arr)) // Output should be 1
+
+
+
+
