@@ -187,10 +187,10 @@ func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
     return false
 }
 
-let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
-let target = 3
+//let matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,50]]
+//let target = 3
 
-print(searchMatrix(matrix, target))
+//print(searchMatrix(matrix, target))
 
 //MARK: - 162. Find peak element
 
@@ -227,8 +227,61 @@ func findPeakElement(_ nums: [Int]) -> Int {
 }
 
 // Example usage:
-let nums = [1, 2, 1, 3, 5, 6, 4]
-let peakIndex = findPeakElement(nums)
-print("Peak element index:", peakIndex) // Output: 1 or 5
+//let nums = [1, 2, 1, 3, 5, 6, 4]
+//let peakIndex = findPeakElement(nums)
+//print("Peak element index:", peakIndex) // Output: 1 or 5
+
+
+//MARK: - 378. Kth smallest element in a sorted array
+/*
+ Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smallest element in the matrix.
+ Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+ You must find a solution with a memory complexity better than O(n2).
+ */
+
+
+func countLessEqual(_ matrix: [[Int]], _ guess: Int) -> Int {
+    var count = 0
+    let n = matrix.count
+    var row = n - 1
+    var col = 0
+    while row >= 0 && col < n {
+        if matrix[row][col] <= guess {
+            count += row + 1
+            col += 1
+        } else {
+            row -= 1
+        }
+    }
+    return count
+}
+
+func kthSmallest(_ matrix: [[Int]], _ k: Int) -> Int {
+    let n = matrix.count
+    var low = matrix[0][0]
+    var high = matrix[n - 1][n - 1]
+
+    while low < high {
+        let mid = low + (high - low) / 2
+        let count = countLessEqual(matrix, mid)
+        if count < k {
+            low = mid + 1
+        } else {
+            high = mid
+        }
+    }
+
+    return low
+}
+
+// Example usage:
+let kmatrix = [
+    [1,  5,  9],
+    [10, 11, 13],
+    [12, 13, 15]
+]
+let k = 8
+print(kthSmallest(kmatrix, k)) // Output should be 13
+
 
 
