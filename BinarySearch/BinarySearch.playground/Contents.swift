@@ -317,7 +317,7 @@ func peakIndexInMountainArray(_ arr: [Int]) -> Int {
 //let arr = [0, 1, 0]
 //print(peakIndexInMountainArray(arr)) // Output should be 1
 
-//MARK: - 81 Search in rotated array II
+//MARK: - 81. Search in rotated array II
 /*
  There is an integer array nums sorted in non-decreasing order (not necessarily with distinct values).
 
@@ -365,9 +365,52 @@ func searchB(_ nums: [Int], _ target: Int) -> Bool {
 }
 
 // Example usage:
-let nums = [4, 5, 6, 6, 7, 0, 1, 2, 4, 4]
+//let nums = [4, 5, 6, 6, 7, 0, 1, 2, 4, 4]
+//let target = 5
+//print(searchB(nums, target)) // Output: true
+
+
+//MARK: - 240. Search a 2D matrix II
+/*
+ Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+
+ Integers in each row are sorted in ascending from left to right.
+ Integers in each column are sorted in ascending from top to bottom.
+ */
+
+func searchMatrix2(_ matrix: [[Int]], _ target: Int) -> Bool {
+    guard !matrix.isEmpty && !matrix[0].isEmpty else {
+        return false
+    }
+    
+    var row = 0
+    var col = matrix[0].count - 1
+    
+    while row < matrix.count && col >= 0 {
+        let current = matrix[row][col]
+        
+        if current == target {
+            return true
+        } else if current > target {
+            col -= 1
+        } else {
+            row += 1
+        }
+    }
+    
+    return false
+}
+
+// Example usage:
+let matrix = [
+    [1, 4, 7, 11, 15],
+    [2, 5, 8, 12, 19],
+    [3, 6, 9, 16, 22],
+    [10, 13, 14, 17, 24],
+    [18, 21, 23, 26, 30]
+]
 let target = 5
-print(searchB(nums, target)) // Output: true
+print(searchMatrix2(matrix, target)) // Output: true
 
 
 
